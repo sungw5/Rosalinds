@@ -5,12 +5,12 @@
 #define SWAP(x, y) {int temp; temp=x; x=y; y=temp;}
 //#define parent(v) ((v-1)/2)
 
+
 void heapify(int *arr, int size, int root){
-    int last = root; //save root to last node
+    int last = root;
     int left = root*2+1;
     int right = root*2+2;
 
-    // check if left or right child exist
     if(left<size && arr[left] > arr[last]){
         last = left;
     }
@@ -29,6 +29,7 @@ void buildheap(int *arr, int size){
     }
 }
 
+
 int main(){
     FILE *inputP, *outputP;
     int i;
@@ -36,7 +37,7 @@ int main(){
     int size;
 
     
-    inputP = fopen("rosalind_heap.txt", "r");
+    inputP = fopen("rosalind_bheap.txt", "r");
     assert(inputP !=NULL);
     // get size of array
     fscanf(inputP, "%d\n", &size);
@@ -57,12 +58,8 @@ int main(){
     
     // create heap
     buildheap(arr, size);
-    for(int i=size-1; i>0; i--){
-        SWAP(arr[0], arr[i]);
-        heapify(arr, i, 0);
-    }
 
-    outputP = fopen("heapsortOutput.txt", "w");
+    outputP = fopen("buildheapOutput.txt", "w");
     
     //print result
     for(i=0; i<size; i++){
