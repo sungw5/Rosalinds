@@ -6,11 +6,11 @@
 //#define parent(v) ((v-1)/2)
 
 void heapify(int *arr, int size, int root){
-    int last = root; //save root to last node
-    int left = root*2+1;
-    int right = root*2+2;
+    int last = root; //save root to last
+    int left = root*2+1; // last parent node's left child
+    int right = root*2+2; // last parent node's right child
 
-    // check if left or right child exist
+    // check left and right child
     if(left<size && arr[left] > arr[last]){
         last = left;
     }
@@ -21,10 +21,13 @@ void heapify(int *arr, int size, int root){
         SWAP(arr[last], arr[root]);
         heapify(arr, size, last);
     }
+    // if a subtree completes heapify, getout
 }
+
 void buildheap(int *arr, int size){
     int root = (size/2)-1;
-    for(int i= root; i>=0; i--){
+    //find next last parent node if heapify is complete for very last parent node
+    for(int i= root; i>=0; i--){ 
         heapify(arr, size, i);
     }
 }
@@ -35,7 +38,6 @@ int main(){
     int *arr;
     int size;
 
-    
     inputP = fopen("rosalind_heap.txt", "r");
     assert(inputP !=NULL);
     // get size of array
@@ -72,7 +74,6 @@ int main(){
     fprintf(outputP, "\n");
 
     // close and free    
-    
     fclose(outputP);
     free(arr);
 
